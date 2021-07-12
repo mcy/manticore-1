@@ -17,6 +17,7 @@ use crate::io;
 // proves to be a non-starter.
 #[macro_use]
 mod der;
+#[macro_use]
 mod cbor;
 mod cwt;
 mod x509;

@@ -16,6 +16,10 @@ use crate::cert::Error;
 use crate::cert::Name;
 use crate::cert::PublicKeyParams;
 
+#[cfg(test)]
+#[path = "cwt_test.rs"]
+mod test;
+
 // Well-known CBOR labels.
 #[allow(unused)]
 mod label {
@@ -143,7 +147,7 @@ fn parse_cose_key<'cert>(
             label::KEY_KTY_RSA => {
                 let modulus = map.must_get(label::RSA_MODULUS)?.into_bytes()?;
                 let exponent =
-                    map.must_get(label::RSA_MODULUS)?.into_bytes()?;
+                    map.must_get(label::RSA_EXPONENT)?.into_bytes()?;
                 PublicKeyParams::Rsa { modulus, exponent }
             }
             _ => return Err(Error::UnknownAlgorithm),
